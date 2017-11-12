@@ -25,7 +25,6 @@ namespace afishaParser {
 
 		private void EventLoaded(object sender, Event ev) {
 			Dispatcher.Invoke(() =>	dataGrid.Items.Add(ev));
-			Console.WriteLine();
 		}
 
 		private async void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -63,22 +62,6 @@ namespace afishaParser {
 		private void Button_Click(object sender, RoutedEventArgs e) {
 			if (events != null)
 				EventManager.GetInstance().Synchronize(events);
-		}
-
-		private static T FindVisualChildByName<T>(DependencyObject parent, string name) where T : DependencyObject {
-			for(int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++) {
-				var child = VisualTreeHelper.GetChild(parent, i);
-				string controlName = child.GetValue(Control.NameProperty) as string;
-				if(controlName == name) {
-					return child as T;
-				}
-				else {
-					T result = FindVisualChildByName<T>(child, name);
-					if(result != null)
-						return result;
-				}
-			}
-			return null;
 		}
 	}
 }

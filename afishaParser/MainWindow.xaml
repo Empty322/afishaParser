@@ -16,7 +16,7 @@
 				<DataTemplate>
 					<DockPanel Name="s">
 						<Image HorizontalAlignment="Left" DockPanel.Dock="Left" Source="{Binding Path=ImgPath}" Width="180"></Image>
-						<TextBlock Width="270" Name="descr" DockPanel.Dock="Right" Text="{Binding Path=Description}" Margin="5" TextWrapping="Wrap"></TextBlock>
+						<TextBlock FontSize="10" Width="270" Name="descr" DockPanel.Dock="Right" Text="{Binding Path=Description}" Margin="5" TextWrapping="Wrap"></TextBlock>
 					</DockPanel>
 				</DataTemplate>
 			</DataGrid.RowDetailsTemplate>
