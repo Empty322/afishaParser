@@ -69,8 +69,6 @@
     </Compile>
     <Compile Include="Event.cs" />
     <Compile Include="EventManager.cs" />
-    <Compile Include="IEventManager.cs" />
-    <Compile Include="IParser.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

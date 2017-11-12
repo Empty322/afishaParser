@@ -10,7 +10,7 @@ using AngleSharp.Dom.Html;
 using System.Windows;
 
 namespace afishaParser {
-	class Parser : IParser {
+	class Parser {
 
 		readonly string url;
 
