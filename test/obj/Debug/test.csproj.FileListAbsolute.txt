@@ -1,0 +1,8 @@
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\test\bin\Debug\test.exe.config
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\test\bin\Debug\test.exe
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\test\bin\Debug\test.pdb
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\test\obj\Debug\test.exe
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\test\obj\Debug\test.pdb
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\test\bin\Debug\AngleSharp.dll
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\test\bin\Debug\AngleSharp.xml

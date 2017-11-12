@@ -1,0 +1,16 @@
+c:\users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\bin\Debug\afishaParser.exe.config
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\bin\Debug\afishaParser.exe
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\bin\Debug\afishaParser.pdb
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser.csprojResolveAssemblyReference.cache
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\MainWindow.g.cs
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\App.g.cs
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser_MarkupCompile.cache
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser_MarkupCompile.lref
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\MainWindow.baml
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser.g.resources
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser.Properties.Resources.resources
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser.csproj.GenerateResource.Cache
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser.exe
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser.pdb
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\bin\Debug\AngleSharp.dll
+C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\bin\Debug\AngleSharp.xml
