@@ -5,24 +5,138 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:afishaParser"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="200" MinWidth="630" Width="630" Loaded="Window_Loaded">
-	<Grid>
+		x:Name="AppWindow"
+		WindowStyle="None"
+		AllowsTransparency="True"
+		Background="LightGray"
+        Title="Afisha Parser" 
+		MinHeight="{Binding WindowMinimumHeight}"
+		MinWidth="{Binding WindowMinimumWidth}" 
+		Loaded="Window_Loaded">
+	<WindowChrome.WindowChrome>
+		<WindowChrome 
+			ResizeBorderThickness="{Binding ResizeBorderThickness}"
+			CaptionHeight="{Binding TitleHeight}"
+			CornerRadius="0"
+			GlassFrameThickness="0"
+		/>
+	</WindowChrome.WindowChrome>
+	<Window.Resources>
+	</Window.Resources>
+
+
+	<Grid DataContext="{Binding DataViewModel}">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition MinWidth="400" Width="487*"></ColumnDefinition>
-			<ColumnDefinition Width="120*"></ColumnDefinition>
+			<ColumnDefinition Width="0.4*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-		<DataGrid x:Name="dataGrid" Grid.Column="0" GridLinesVisibility="Vertical" HorizontalGridLinesBrush="#FF4D4D4D" VerticalGridLinesBrush="#FF5B5B5B" IsReadOnly="True">
-			<DataGrid.RowDetailsTemplate>
-				<DataTemplate>
-					<DockPanel Name="s">
-						<Image HorizontalAlignment="Left" DockPanel.Dock="Left" Source="{Binding Path=ImgPath}" Width="180"></Image>
-						<TextBlock FontSize="10" Width="270" Name="descr" DockPanel.Dock="Right" Text="{Binding Path=Description}" Margin="5" TextWrapping="Wrap"></TextBlock>
-					</DockPanel>
-				</DataTemplate>
-			</DataGrid.RowDetailsTemplate>
-		</DataGrid>
-		<StackPanel Grid.Column="1">
-			<Button Name="synchroBtn" Height="30" Margin="5" Click="Button_Click" IsEnabled="False">Синхронизировать</Button>
-		</StackPanel>
+		<DockPanel Grid.Column="0">
+			<Grid DockPanel.Dock="Top">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<TextBox Style="{StaticResource TextBoxTamplate}" Name="searchBox" Grid.Column="0" Padding="5" FontWeight="Bold" Height="40" FontSize="20" TextChanged="SearchBoxTextChanged"/>
+				<StackPanel Orientation="Horizontal" Grid.Column="1">
+					<Button Style="{StaticResource DefaultButton}" Width="40" Click="ClearSearchBoxBtn">
+						<Image Source="Resource/close.png"/>
+					</Button>
+					<Button Style="{StaticResource DefaultButton}" Width="40" Click="ShowFiltersBtn">
+						<Image Source="Resource/options.png"/>
+					</Button>
+				</StackPanel>
+			</Grid>
+			<Border DockPanel.Dock="Top" BorderThickness="2">
+				<Border.BorderBrush>
+					<LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+						<GradientStop Color="{StaticResource ForegroundMain}" Offset="1"/>
+						<GradientStop Color="Transparent" Offset="0"/>
+					</LinearGradientBrush>
+				</Border.BorderBrush>
+			</Border>
+			<StackPanel Name="filters" Background="{StaticResource ForegroundMainBrush}" Visibility="Collapsed" DockPanel.Dock="Top">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+					
+					<TextBlock DockPanel.Dock="Left" >День:</TextBlock>
+					<ComboBox Margin="1" Grid.Column="1" DockPanel.Dock="Right" Text="{Binding Day}" IsEditable="False">
+						<ComboBoxItem Content="Пн"/>
+						<ComboBoxItem Content="Вт"/>
+						<ComboBoxItem Content="Ср"/>
+						<ComboBoxItem Content="Чт"/>
+						<ComboBoxItem Content="Пт"/>
+						<ComboBoxItem Content="Сб"/>
+						<ComboBoxItem Content="Вс"/>
+					</ComboBox>
+					
+					<TextBlock Grid.Row="1" DockPanel.Dock="Left">Место:</TextBlock>
+					<ComboBox Margin="1" Grid.Row="1" Grid.Column="1" DockPanel.Dock="Right" Text="{Binding Location}" ItemsSource="{Binding Locations}" IsEditable="False"/>
+
+					<TextBlock Grid.Row="2" DockPanel.Dock="Left">От:</TextBlock>
+					<DatePicker TextBlock.FontFamily="{StaticResource StolzlBook}" FontSize="24" Margin="1" Grid.Row="2" Grid.Column="1" DockPanel.Dock="Right" SelectedDate="{Binding FromDate}"></DatePicker>
+
+					<TextBlock Grid.Row="3" DockPanel.Dock="Left">До:</TextBlock>
+					<DatePicker TextBlock.FontFamily="{StaticResource StolzlBook}" FontSize="24" Margin="1" Grid.Row="3" Grid.Column="1" DockPanel.Dock="Right" SelectedDate="{Binding ToDate}"></DatePicker>
+
+				</Grid>
+				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+					<Button Margin="5" Style="{StaticResource DefaultButton}" Click="SubmitFiltersBtn">
+						<Image Source="Resource/ok.png" Height="40"/>
+					</Button>
+					<Button Style="{StaticResource DefaultButton}" Width="40" Click="ClearFiltersBtn">
+						<Image Source="Resource/close.png"/>
+					</Button>
+				</StackPanel>
+			</StackPanel>
+			<ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding SortedEvents}" 
+					 BorderBrush="Transparent"
+					 SelectedItem="{Binding SelectedEvent}"
+					 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+					 ScrollViewer.VerticalScrollBarVisibility="Hidden">
+				<ListBox.ItemTemplate>
+					<ItemContainerTemplate>
+						<StackPanel>
+							<TextBlock TextTrimming="CharacterEllipsis" Text="{Binding Path=Title}"/>
+						</StackPanel>
+					</ItemContainerTemplate>					
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</DockPanel>
+
+
+		<ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden">
+			<DockPanel DataContext="{Binding SelectedEvent}">
+				<TextBlock DockPanel.Dock="Top" Text="{Binding Path=Title}" FontSize="20" HorizontalAlignment="Center" Margin="8"/>
+				<Border DockPanel.Dock="Top" BorderThickness="2" Margin="10 0">
+					<Border.BorderBrush>
+						<LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+							<GradientStop Color="{StaticResource ForegroundMain}" Offset="1"/>
+							<GradientStop Color="Transparent" Offset="0"/>
+						</LinearGradientBrush>
+					</Border.BorderBrush>
+				</Border>
+				<DockPanel x:Name="Content" DockPanel.Dock="Top">
+					<Border DockPanel.Dock="Left" BorderThickness="0" BorderBrush="Black" Padding="2" Margin="10">
+						<Image Source="{Binding Path=ImgPath}" Height="240"/>
+					</Border>
+					<StackPanel DockPanel.Dock="Right">
+						<TextBlock Text="{Binding Path=Date, StringFormat=Дата: {0}}"/>
+						<TextBlock Text="{Binding Path=Time, StringFormat=Время: {0}}"/>
+						<TextBlock Text="{Binding Path=Location, StringFormat=Место: {0}}"/>
+						<TextBlock Text="{Binding Path=Day, StringFormat=День: {0}}"/>
+					</StackPanel>
+				</DockPanel>
+				<TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" FontSize="14" Text="{Binding Path=Description}"/>
+			</DockPanel>
+		</ScrollViewer>
 	</Grid>
 </Window>

@@ -14,3 +14,13 @@ C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\o
 C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser.pdb
 C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\bin\Debug\AngleSharp.dll
 C:\Users\misha\documents\visual studio 2015\Projects\afishaParser\afishaParser\bin\Debug\AngleSharp.xml
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\App.baml
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\Styles\Buttons.baml
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\Styles\Colors.baml
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\Styles\Fonts.baml
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\Styles\Texts.baml
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\Styles\Windows.baml
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\Styles\TextBox.baml
