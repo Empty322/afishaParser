@@ -68,7 +68,7 @@
 	<Style TargetType="{x:Type Button}" x:Key="DefaultButton" >
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="Button">
+				<ControlTemplate TargetType="{x:Type Button}">
 					<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.6">
 						<ContentPresenter/>
 					</StackPanel>
@@ -77,6 +77,31 @@
 							<Setter Property="Opacity" Value="1"/>
 						</Trigger>
 						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="RenderTransform">
+								<Setter.Value>
+									<ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+								</Setter.Value>
+							</Setter>
+							<Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type ToggleButton}" x:Key="DefaultToggleButton" >
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.6">
+						<ContentPresenter/>
+					</StackPanel>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Opacity" Value="1"/>
+						</Trigger>
+						<Trigger Property="IsChecked" Value="True">
 							<Setter Property="RenderTransform">
 								<Setter.Value>
 									<ScaleTransform ScaleX="0.9" ScaleY="0.9"/>

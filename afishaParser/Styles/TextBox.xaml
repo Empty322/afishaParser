@@ -7,7 +7,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate>
-					<Border Background="{StaticResource BackgroundLightBrush}" CornerRadius="2" >
+					<Border Background="{StaticResource BackgroundLightBrush}" CornerRadius="2" BorderThickness="0 0 0 1" BorderBrush="Gray">
 						<ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
 					</Border>
 				</ControlTemplate>

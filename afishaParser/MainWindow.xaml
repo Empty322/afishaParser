@@ -11,8 +11,7 @@
 		Background="LightGray"
         Title="Afisha Parser" 
 		MinHeight="{Binding WindowMinimumHeight}"
-		MinWidth="{Binding WindowMinimumWidth}" 
-		Loaded="Window_Loaded">
+		MinWidth="{Binding WindowMinimumWidth}">
 	<WindowChrome.WindowChrome>
 		<WindowChrome 
 			ResizeBorderThickness="{Binding ResizeBorderThickness}"
@@ -22,6 +21,7 @@
 		/>
 	</WindowChrome.WindowChrome>
 	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="boolToVis" />
 	</Window.Resources>
 
 
@@ -36,14 +36,14 @@
 					<ColumnDefinition Width="*"></ColumnDefinition>
 					<ColumnDefinition Width="auto"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
-				<TextBox Style="{StaticResource TextBoxTamplate}" Name="searchBox" Grid.Column="0" Padding="5" FontWeight="Bold" Height="40" FontSize="20" TextChanged="SearchBoxTextChanged"/>
+				<TextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxTamplate}" Grid.Column="0" Padding="5" FontWeight="Bold" Height="40" FontSize="20"/>
 				<StackPanel Orientation="Horizontal" Grid.Column="1">
-					<Button Style="{StaticResource DefaultButton}" Width="40" Click="ClearSearchBoxBtn">
+					<Button Command="{Binding ClearSearchText}" Style="{StaticResource DefaultButton}" Width="40">
 						<Image Source="Resource/close.png"/>
 					</Button>
-					<Button Style="{StaticResource DefaultButton}" Width="40" Click="ShowFiltersBtn">
+					<ToggleButton x:Name="filtersBtn" Style="{StaticResource DefaultToggleButton}" IsThreeState="False" Width="40">						
 						<Image Source="Resource/options.png"/>
-					</Button>
+					</ToggleButton>
 				</StackPanel>
 			</Grid>
 			<Border DockPanel.Dock="Top" BorderThickness="2">
@@ -54,7 +54,7 @@
 					</LinearGradientBrush>
 				</Border.BorderBrush>
 			</Border>
-			<StackPanel Name="filters" Background="{StaticResource ForegroundMainBrush}" Visibility="Collapsed" DockPanel.Dock="Top">
+			<StackPanel DataContext="{Binding FilterOptions}" Background="{StaticResource ForegroundMainBrush}" Visibility="{Binding ElementName=filtersBtn, Path=IsChecked, Converter={StaticResource boolToVis}}" DockPanel.Dock="Top">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition/>
@@ -89,10 +89,10 @@
 
 				</Grid>
 				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-					<Button Margin="5" Style="{StaticResource DefaultButton}" Click="SubmitFiltersBtn">
+					<Button Margin="5" Style="{StaticResource DefaultButton}" Command="{Binding SubmitFilters}">
 						<Image Source="Resource/ok.png" Height="40"/>
 					</Button>
-					<Button Style="{StaticResource DefaultButton}" Width="40" Click="ClearFiltersBtn">
+					<Button Style="{StaticResource DefaultButton}" Width="40" Command="{Binding ClearFilters}">
 						<Image Source="Resource/close.png"/>
 					</Button>
 				</StackPanel>

@@ -24,7 +24,7 @@
 									<RowDefinition Height="auto"></RowDefinition>
 									<RowDefinition Height="*"></RowDefinition>
 								</Grid.RowDefinitions>
-								<Grid Grid.Column="0" Panel.ZIndex="1">
+								<Grid Grid.Column="0">
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="auto"></ColumnDefinition>
 										<ColumnDefinition Width="*"></ColumnDefinition>
@@ -33,7 +33,7 @@
 									<Button Style="{StaticResource SystemIconButton}" Command="{Binding MenuCommand}">
 										<Image Opacity="0.6" Source="../Resource/logo.png"/>
 									</Button>
-									<Viewbox Grid.Column="1" Margin="0">
+									<Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="0">
 										<TextBlock Style="{StaticResource HeaderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue='Afisha Parser'}"/>
 									</Viewbox>
 									<StackPanel Grid.Column="2" Orientation="Horizontal">
