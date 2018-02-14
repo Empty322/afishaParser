@@ -24,3 +24,7 @@ C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\b
 C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\bin\Debug\Microsoft.Windows.Shell.pdb
 C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\Styles\TextBox.baml
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\Styles\ListBox.baml
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\bin\Debug\afishaParserBD.mdf
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\bin\Debug\afishaParserBD_log.ldf
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser_Content.g.cs

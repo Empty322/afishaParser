@@ -18,13 +18,13 @@ namespace afishaParser {
 			url = "http://concertinfo.ru";
 		}
 
-		public event Action<object, Event> eventLoaded;
-		public event Action<object> onCompleted;
+		public event Action<object, Event> EventLoaded;
+		public event Action<object> OnCompleted;
 
 		/// <summary>
-		/// Получить лист событий
+		/// Загрузить лист событий
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>Лист событий</returns>
 		public List<Event> Parse() {
 			List<Event> events = new List<Event>();
 			// получить html строку
@@ -43,15 +43,19 @@ namespace afishaParser {
 			for(int i = 0; i < htmlEvents.Count - 1; i++) {
 				doc = domParser.Parse(htmlEvents[i]);
 				events.Add(GetInfo(doc));
-				if(eventLoaded != null)
-					eventLoaded?.Invoke(this, events[i]);
+				if(EventLoaded != null)
+					EventLoaded?.Invoke(this, events[i]);
 			}
-			if(onCompleted != null)
-				onCompleted?.Invoke(this);
+			if(OnCompleted != null)
+				OnCompleted?.Invoke(this);
 
 			return events;
 		}
 
+		/// <summary>
+		/// Загрузить лист событий асинхронно
+		/// </summary>
+		/// <returns>Лист событий</returns>
 		public async Task< List<Event> > ParseAsync() {
 			Task< List<Event> > task = new Task< List<Event> >(Parse);
 			task.Start();
@@ -63,6 +67,7 @@ namespace afishaParser {
 		/// Достать инф. о событии из блока исходного кода страницы
 		/// </summary>
 		/// <param name="htmlEvent">Блок исходного кода в котором содержится инф. о событии</param>
+		/// <returns>Информация о событии</returns>
 		private Event GetInfo(IHtmlDocument htmlEvent) {
 			Event temp = new Event();
 			//заглавие
@@ -98,14 +103,14 @@ namespace afishaParser {
 		/// Скачать изображение
 		/// </summary>
 		/// <param name="src">Путь к изображению</param>
-		/// <returns></returns>
+		/// <returns>Путь к скачанному изображению</returns>
 		private string DownloadPic(string src) {
-			//создать папку pics если ее нет
-			if(Directory.Exists(Directory.GetCurrentDirectory() + "pics"))
+			// создать папку pics если ее нет
+			if(!Directory.Exists(Directory.GetCurrentDirectory() + "pics"))
 				Directory.CreateDirectory("pics");
 			int idx = src.LastIndexOf('/');
 			string path = Directory.GetCurrentDirectory() + "\\pics\\" + src.Substring(idx + 1);
-			//если такой картинки нет, то скачать ее
+			// если такой картинки нет, то скачать ее
 			if(!File.Exists(path)) {
 				WebClient client = new WebClient();
 				client.DownloadFile(url + src, path);
@@ -117,7 +122,7 @@ namespace afishaParser {
 		/// Разделить страницу на блоки с инф. о событии
 		/// </summary>
 		/// <param name="doc">Исходный код страницы</param>
-		/// <returns></returns>
+		/// <returns>HTML блок с инф. о событии</returns>
 		private List<string> DivideHtml(IHtmlDocument doc) {
 			List<string> htmlEvents = new List<string>();
 			var items = doc.QuerySelectorAll("div").Where(item => item.ClassName != null && item.ClassName == "gig_block");
@@ -130,7 +135,7 @@ namespace afishaParser {
 		/// <summary>
 		/// Получить исходный код страницы
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>исходный код страницы</returns>
 		private string GetHtml() {
 			string html = "";
 			HttpClient client = new HttpClient();

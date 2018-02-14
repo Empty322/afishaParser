@@ -97,7 +97,8 @@ namespace afishaParser {
 			this.window = window;
 			this.DataViewModel = dvm;
 
-			window.StateChanged += (sender, e) => {
+			window.StateChanged += (sender, e) =>
+			{
 				OnPropertyChanged(nameof(ResizeBorderThickness));
 				OnPropertyChanged(nameof(OuterMarginSize));
 				OnPropertyChanged(nameof(OuterMarginSizeThickness));

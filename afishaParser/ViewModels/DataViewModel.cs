@@ -49,6 +49,8 @@ namespace afishaParser {
 
 		public ICommand ClearSearchText { get; set; }
 
+		public ICommand Synchronize { get; set; }
+
 		#endregion
 
 		#region Constructor
@@ -59,6 +61,7 @@ namespace afishaParser {
 			SortedEvents = new ObservableCollection<Event>();
 			Events = new List<Event>();
 			ClearSearchText = new RelayCommand(() => SearchText = "");
+			Synchronize = new RelayCommand(() => EventManagerBD.GetInstance().Synchronize(Events));
 			StartParse();
 		}
 
@@ -130,7 +133,7 @@ namespace afishaParser {
 			parser = new Parser();
 			Events = await parser.ParseAsync();
 			if(Events == null)
-				Events = EventManager.GetInstance().LoadData();
+				Events = EventManagerBD.GetInstance().LoadData();
 			FilterOptions.Locations = new List<string>(Events.Select((ev) => ev.Location).Distinct());
 			Sort();
 		}

@@ -21,17 +21,17 @@
 		/>
 	</WindowChrome.WindowChrome>
 	<Window.Resources>
-		<BooleanToVisibilityConverter x:Key="boolToVis" />
+		<BooleanToVisibilityConverter x:Key="boolToVis"/>
 	</Window.Resources>
 
 
-	<Grid DataContext="{Binding DataViewModel}">
+	<Grid Name="main" DataContext="{Binding DataViewModel}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="0.4*"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 		<DockPanel Grid.Column="0">
-			<Grid DockPanel.Dock="Top">
+			<Grid DockPanel.Dock="Top" Margin="5 0 5 4">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"></ColumnDefinition>
 					<ColumnDefinition Width="auto"></ColumnDefinition>
@@ -46,7 +46,7 @@
 					</ToggleButton>
 				</StackPanel>
 			</Grid>
-			<Border DockPanel.Dock="Top" BorderThickness="2">
+			<Border DockPanel.Dock="Top" BorderThickness="2" Margin="5 0">
 				<Border.BorderBrush>
 					<LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
 						<GradientStop Color="{StaticResource ForegroundMain}" Offset="1"/>
@@ -54,7 +54,11 @@
 					</LinearGradientBrush>
 				</Border.BorderBrush>
 			</Border>
-			<StackPanel DataContext="{Binding FilterOptions}" Background="{StaticResource ForegroundMainBrush}" Visibility="{Binding ElementName=filtersBtn, Path=IsChecked, Converter={StaticResource boolToVis}}" DockPanel.Dock="Top">
+			<StackPanel DataContext="{Binding FilterOptions}" 
+						Background="{StaticResource ForegroundMainBrush}" 
+						Visibility="{Binding ElementName=filtersBtn, Path=IsChecked, Converter={StaticResource boolToVis}}"
+						DockPanel.Dock="Top"
+						Margin="5 0">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition/>
@@ -66,7 +70,7 @@
 						<ColumnDefinition Width="auto"/>
 						<ColumnDefinition Width="*"/>
 					</Grid.ColumnDefinitions>
-					
+
 					<TextBlock DockPanel.Dock="Left" >День:</TextBlock>
 					<ComboBox Margin="1" Grid.Column="1" DockPanel.Dock="Right" Text="{Binding Day}" IsEditable="False">
 						<ComboBoxItem Content="Пн"/>
@@ -77,7 +81,7 @@
 						<ComboBoxItem Content="Сб"/>
 						<ComboBoxItem Content="Вс"/>
 					</ComboBox>
-					
+
 					<TextBlock Grid.Row="1" DockPanel.Dock="Left">Место:</TextBlock>
 					<ComboBox Margin="1" Grid.Row="1" Grid.Column="1" DockPanel.Dock="Right" Text="{Binding Location}" ItemsSource="{Binding Locations}" IsEditable="False"/>
 
@@ -88,34 +92,45 @@
 					<DatePicker TextBlock.FontFamily="{StaticResource StolzlBook}" FontSize="24" Margin="1" Grid.Row="3" Grid.Column="1" DockPanel.Dock="Right" SelectedDate="{Binding ToDate}"></DatePicker>
 
 				</Grid>
-				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-					<Button Margin="5" Style="{StaticResource DefaultButton}" Command="{Binding SubmitFilters}">
-						<Image Source="Resource/ok.png" Height="40"/>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="auto"/>
+					</Grid.ColumnDefinitions>
+					<Button Margin="5" Style="{StaticResource DefaultButton}" Command="{Binding DataContext.Synchronize, ElementName=main}" HorizontalAlignment="Left">
+						<Image Source="Resource/sync.png" Height="40"/>
 					</Button>
-					<Button Style="{StaticResource DefaultButton}" Width="40" Command="{Binding ClearFilters}">
-						<Image Source="Resource/close.png"/>
-					</Button>
-				</StackPanel>
+					<StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+						<Button Margin="5" Style="{StaticResource DefaultButton}" Command="{Binding SubmitFilters}">
+							<Image Source="Resource/ok.png" Height="40"/>
+						</Button>
+						<Button Style="{StaticResource DefaultButton}" Width="40" Command="{Binding ClearFilters}">
+							<Image Source="Resource/close.png"/>
+						</Button>
+					</StackPanel>
+				</Grid>
 			</StackPanel>
-			<ListBox DockPanel.Dock="Bottom" ItemsSource="{Binding SortedEvents}" 
-					 BorderBrush="Transparent"
-					 SelectedItem="{Binding SelectedEvent}"
+			<ListBox DockPanel.Dock="Bottom" 
+					 BorderThickness="0"
+					 ItemsSource="{Binding SortedEvents}"
+					 SelectedItem="{Binding SelectedEvent, Mode=TwoWay}"
 					 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-					 ScrollViewer.VerticalScrollBarVisibility="Hidden">
-				<ListBox.ItemTemplate>
-					<ItemContainerTemplate>
-						<StackPanel>
-							<TextBlock TextTrimming="CharacterEllipsis" Text="{Binding Path=Title}"/>
-						</StackPanel>
-					</ItemContainerTemplate>					
-				</ListBox.ItemTemplate>
+					 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+					 HorizontalContentAlignment="Stretch">
+				<ListBox.ItemContainerStyle>
+					<Style TargetType="ListBoxItem">
+						<Setter Property="Template" Value="{StaticResource ItemTemplate}"/>
+						<Setter Property="Margin" Value="5"/>
+					</Style>
+				</ListBox.ItemContainerStyle>
 			</ListBox>
 		</DockPanel>
 
 
 		<ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden">
-			<DockPanel DataContext="{Binding SelectedEvent}">
-				<TextBlock DockPanel.Dock="Top" Text="{Binding Path=Title}" FontSize="20" HorizontalAlignment="Center" Margin="8"/>
+			<DockPanel x:Name="Content" DataContext="{Binding SelectedEvent}">
+				<TextBlock DockPanel.Dock="Top" Text="{Binding Path=Title}" FontSize="20" HorizontalAlignment="Center" Margin="10"/>
 				<Border DockPanel.Dock="Top" BorderThickness="2" Margin="10 0">
 					<Border.BorderBrush>
 						<LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
@@ -124,13 +139,13 @@
 						</LinearGradientBrush>
 					</Border.BorderBrush>
 				</Border>
-				<DockPanel x:Name="Content" DockPanel.Dock="Top">
+				<DockPanel DockPanel.Dock="Top">
 					<Border DockPanel.Dock="Left" BorderThickness="0" BorderBrush="Black" Padding="2" Margin="10">
 						<Image Source="{Binding Path=ImgPath}" Height="240"/>
 					</Border>
 					<StackPanel DockPanel.Dock="Right">
 						<TextBlock Text="{Binding Path=Date, StringFormat=Дата: {0}}"/>
-						<TextBlock Text="{Binding Path=Time, StringFormat=Время: {0}}"/>
+						<TextBlock Text="{Binding Time, StringFormat=Время: \{0\}}"/>
 						<TextBlock Text="{Binding Path=Location, StringFormat=Место: {0}}"/>
 						<TextBlock Text="{Binding Path=Day, StringFormat=День: {0}}"/>
 					</StackPanel>

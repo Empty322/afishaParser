@@ -2,7 +2,7 @@
 using System.IO;
 
 namespace afishaParser {
-	class EventManager {
+	public class EventManager {
 		private List<Event> events;
 		private string currentDataPath;
 		static private EventManager instance;

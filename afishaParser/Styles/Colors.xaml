@@ -2,13 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:afishaParser">
 
+	<Color x:Key="BackgroundLightGray">#bbbbbd</Color>
+	<SolidColorBrush x:Key="BackgroundLightGrayBrush" Color="{StaticResource BackgroundLightGray}"/>
+
+
 	<Color x:Key="BackgroundLight">#e6e6e6</Color>
 	<SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource BackgroundLight}"/>
 
 	<Color x:Key="BackgroundVaryLight">#f0f0f0</Color>
 	<SolidColorBrush x:Key="BackgroundVaryLightBrush" Color="{StaticResource BackgroundVaryLight}"/>
 
-	<Color x:Key="ForegroundMain">#a8a8a8</Color>
+	<Color x:Key="ForegroundMain">#9f9fa1</Color>
 	<SolidColorBrush x:Key="ForegroundMainBrush" Color="{StaticResource ForegroundMain}"/>
 
 	<Color x:Key="ForegroundDark">#000000</Color>
