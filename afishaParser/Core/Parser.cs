@@ -73,22 +73,22 @@ namespace afishaParser {
 			//заглавие
 			var title = htmlEvent.QuerySelectorAll("span").Where(i => i.ClassName != null && i.ClassName == "gig_title");
 			var t = title.ToArray();
-			temp.Title = title.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "");
+			temp.Title = title.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "").Replace("'", "''");
 			//место проведения
 			var location = htmlEvent.QuerySelector("[itemprop=\"name\"]");
-			temp.Location = location.TextContent;
+			temp.Location = location.TextContent.Replace("'", "''");
 			//описание
 			var description = htmlEvent.QuerySelector("[itemprop=\"description\"]");
-			temp.Description = description.TextContent;
+			temp.Description = description.TextContent.Replace("'", "''");
 			//время
 			var time = htmlEvent.QuerySelectorAll("span").Where(i => i.ClassName != null && i.ClassName == "gig_time");
-			temp.Time = time.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "");
+			temp.Time = time.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "").Replace("'", "''");
 			//дата
 			var date = htmlEvent.QuerySelector("[itemprop=\"startDate\"]");
 			temp.Date = date.TextContent.Substring(0, 10);
 			//день
 			var day = htmlEvent.QuerySelectorAll("span").Where(i => i.ClassName != null && i.ClassName == "gig_day");
-			temp.Day = day.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "");
+			temp.Day = day.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "").Replace("'", "''");
 			//путь к картинке(скачать ее)
 			var ImgSrc = htmlEvent.QuerySelectorAll("img").Where(i => i.ClassName != null && i.ClassName == "gig_img");
 			temp.ImgPath = DownloadPic(ImgSrc.ElementAt(0).GetAttribute("src"));
