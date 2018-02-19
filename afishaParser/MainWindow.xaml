@@ -41,7 +41,7 @@
 					<Button Command="{Binding ClearSearchText}" Style="{StaticResource DefaultButton}" Width="40">
 						<Image Source="Resource/close.png"/>
 					</Button>
-					<ToggleButton x:Name="filtersBtn" Style="{StaticResource DefaultToggleButton}" IsThreeState="False" Width="40">						
+					<ToggleButton x:Name="filtersBtn" Style="{StaticResource DefaultToggleButton}" IsThreeState="False" Width="40">
 						<Image Source="Resource/options.png"/>
 					</ToggleButton>
 				</StackPanel>
@@ -99,7 +99,7 @@
 						<ColumnDefinition Width="auto"/>
 					</Grid.ColumnDefinitions>
 					<Button Margin="5" Style="{StaticResource DefaultButton}" Command="{Binding DataContext.Synchronize, ElementName=main}" HorizontalAlignment="Left">
-						<Image Source="Resource/sync.png" Height="40"/>
+						<Image Source="Resource/sync.png" Height="40" Tag="{Binding DataContext.IsSynchronizing, ElementName=main}" Style="{StaticResource loadingImage}"/>
 					</Button>
 					<StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
 						<Button Margin="5" Style="{StaticResource DefaultButton}" Command="{Binding SubmitFilters}">
@@ -111,22 +111,29 @@
 					</StackPanel>
 				</Grid>
 			</StackPanel>
-			<ListBox DockPanel.Dock="Bottom" 
+			<Grid>
+				<ListBox DockPanel.Dock="Bottom" 
 					 BorderThickness="0"
 					 ItemsSource="{Binding SortedEvents}"
 					 SelectedItem="{Binding SelectedEvent, Mode=TwoWay}"
 					 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
 					 ScrollViewer.VerticalScrollBarVisibility="Hidden"
 					 HorizontalContentAlignment="Stretch">
-				<ListBox.ItemContainerStyle>
-					<Style TargetType="ListBoxItem">
-						<Setter Property="Template" Value="{StaticResource ItemTemplate}"/>
-						<Setter Property="Margin" Value="5"/>
-					</Style>
-				</ListBox.ItemContainerStyle>
-			</ListBox>
+					<ListBox.ItemContainerStyle>
+						<Style TargetType="ListBoxItem">
+							<Setter Property="Template" Value="{StaticResource ItemTemplate}"/>
+							<Setter Property="Margin" Value="5"/>
+						</Style>
+					</ListBox.ItemContainerStyle>
+				</ListBox>
+				<Image Margin="50" Source="Resource/sync.png" 
+					   Visibility="{Binding IsLoading, Converter={StaticResource boolToVis}}" 
+					   Tag="{Binding IsLoading}" 
+					   Style="{StaticResource loadingImage}"
+					   Opacity="0.6">
+				</Image>
+			</Grid>
 		</DockPanel>
-
 
 		<ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden">
 			<DockPanel x:Name="Content" DataContext="{Binding SelectedEvent}">

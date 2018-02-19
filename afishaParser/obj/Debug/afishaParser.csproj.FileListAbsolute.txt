@@ -28,3 +28,5 @@ C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\o
 C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\bin\Debug\afishaParserBD.mdf
 C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\bin\Debug\afishaParserBD_log.ldf
 C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser_Content.g.cs
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\afishaParser.csproj.CoreCompileInputs.cache
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Debug\Styles\Images.baml

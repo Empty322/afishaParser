@@ -17,6 +17,10 @@ namespace afishaParser {
 
 		private string searchText = "";
 
+		private bool isLoading = false;
+
+		private bool isSynchronizing = false;
+
 		#endregion
 
 		#region Public Properties
@@ -43,6 +47,22 @@ namespace afishaParser {
 			}
 		}
 
+		public bool IsLoading {
+			get { return isLoading; }
+			set {
+				isLoading = value;
+				OnPropertyChanged(nameof(IsLoading));
+			}
+		}
+
+		public bool IsSynchronizing {
+			get { return isSynchronizing; }
+			set {
+				isSynchronizing = value;
+				OnPropertyChanged(nameof(IsSynchronizing));
+			}
+		}
+
 		#endregion
 
 		#region Commands
@@ -61,7 +81,13 @@ namespace afishaParser {
 			SortedEvents = new ObservableCollection<Event>();
 			Events = new List<Event>();
 			ClearSearchText = new RelayCommand(() => SearchText = "");
-			Synchronize = new RelayCommand(() => EventManagerBD.GetInstance().Synchronize(Events));
+			Synchronize = new RelayCommand(async () => {
+				if(IsSynchronizing)
+					return;
+				IsSynchronizing = true;
+				await EventManagerBD.GetInstance().SynchronizeAsync(Events);
+				IsSynchronizing = false;
+			});
 			StartParse();
 		}
 
@@ -131,9 +157,11 @@ namespace afishaParser {
 
 		private async void StartParse() {
 			parser = new Parser();
+			IsLoading = true;
 			Events = await parser.ParseAsync();
 			if(Events == null)
-				Events = EventManagerBD.GetInstance().LoadData();
+				Events = await EventManagerBD.GetInstance().LoadDataAsync();
+			IsLoading = false;
 			FilterOptions.Locations = new List<string>(Events.Select((ev) => ev.Location).Distinct());
 			Sort();
 		}

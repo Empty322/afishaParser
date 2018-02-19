@@ -29,3 +29,4 @@ C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\o
 C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Release\afishaParser.csproj.CoreCompileInputs.cache
 C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Release\afishaParser.exe
 C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Release\afishaParser.pdb
+C:\Users\misha\Documents\Visual Studio 2015\Projects\afishaParser\afishaParser\obj\Release\Styles\Images.baml

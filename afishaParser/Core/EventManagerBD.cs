@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Diagnostics;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace afishaParser
 {
@@ -62,6 +63,17 @@ namespace afishaParser
 		}
 
 		/// <summary>
+		/// Синхронизирует локальные данные с загруженными асинхронно
+		/// </summary>
+		/// <param name="events">Лист событий</param>
+		public Task SynchronizeAsync(List<Event> events)
+		{
+			Task t = new Task(() => Synchronize(events));
+			t.Start();
+			return t;
+		}
+
+		/// <summary>
 		/// Загружает события из файла
 		/// </summary>
 		/// <returns></returns>
@@ -101,6 +113,17 @@ namespace afishaParser
 				Connection.Close();
 			}
 			return temp;
+		}
+
+		/// <summary>
+		/// Загружает события из файла асинхронно
+		/// </summary>
+		/// <returns></returns>
+		public async Task<List<Event>> LoadDataAsync() {
+			Task<List<Event>> t = new Task<List<Event>>(LoadData);
+			t.Start();
+			await t;
+			return t.Result;
 		}
 
 		#endregion
