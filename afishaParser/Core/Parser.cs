@@ -8,6 +8,7 @@ using System.IO;
 using AngleSharp.Parser.Html;
 using AngleSharp.Dom.Html;
 using System.Windows;
+using System.Diagnostics;
 
 namespace afishaParser {
 	class Parser {
@@ -89,13 +90,26 @@ namespace afishaParser {
 			//день
 			var day = htmlEvent.QuerySelectorAll("span").Where(i => i.ClassName != null && i.ClassName == "gig_day");
 			temp.Day = day.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "").Replace("'", "''");
-			//путь к картинке(скачать ее)
+			//путь к картинке
 			var ImgSrc = htmlEvent.QuerySelectorAll("img").Where(i => i.ClassName != null && i.ClassName == "gig_img");
-			temp.ImgPath = DownloadPic(ImgSrc.ElementAt(0).GetAttribute("src"));
-			//id по картинке
-			int sidx = temp.ImgPath.LastIndexOf("\\") + 1;
-			int len = temp.ImgPath.LastIndexOf(".") - sidx;
-			temp.Id = Convert.ToInt32(temp.ImgPath.Substring(sidx, len));
+			string imgUrl = ImgSrc.ElementAt(0).GetAttribute("src");
+			//id по номеру картинки
+			int sidx = imgUrl.LastIndexOf("/") + 1;
+			int len = imgUrl.LastIndexOf(".") - sidx;
+			temp.Id = Convert.ToInt32(imgUrl.Substring(sidx, len));
+
+			//Попытаться всачать картинку
+			try
+			{
+				//скачать картинку
+				temp.ImgPath = DownloadPic(ImgSrc.ElementAt(0).GetAttribute("src"));
+			}
+			//если не удалось
+			catch
+			{
+				//поставить картинку по умолчанию
+				temp.ImgPath = "Resource/default.png";
+			}			
 			return temp;
 		}
 
