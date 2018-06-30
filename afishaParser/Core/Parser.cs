@@ -11,9 +11,9 @@ using System.Windows;
 using System.Diagnostics;
 
 namespace afishaParser {
-	class Parser {
+	public class Parser {
 
-		readonly string url;
+		private readonly string url;
 
 		public Parser() {
 			url = "http://concertinfo.ru";
@@ -74,22 +74,22 @@ namespace afishaParser {
 			//заглавие
 			var title = htmlEvent.QuerySelectorAll("span").Where(i => i.ClassName != null && i.ClassName == "gig_title");
 			var t = title.ToArray();
-			temp.Title = title.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "").Replace("'", "''");
+			temp.Title = title.ElementAt(0).TextContent.Trim(' ', '\n').Replace("'", "\"");
 			//место проведения
 			var location = htmlEvent.QuerySelector("[itemprop=\"name\"]");
-			temp.Location = location.TextContent.Replace("'", "''");
+			temp.Location = location.TextContent.Replace("'", "\"");
 			//описание
 			var description = htmlEvent.QuerySelector("[itemprop=\"description\"]");
-			temp.Description = description.TextContent.Replace("'", "''");
+			temp.Description = description.TextContent.Replace("'", "\"");
 			//время
 			var time = htmlEvent.QuerySelectorAll("span").Where(i => i.ClassName != null && i.ClassName == "gig_time");
-			temp.Time = time.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "").Replace("'", "''");
+			temp.Time = time.ElementAt(0).TextContent.Trim(' ', '\n').Replace("'", "\"");
 			//дата
 			var date = htmlEvent.QuerySelector("[itemprop=\"startDate\"]");
 			temp.Date = date.TextContent.Substring(0, 10);
 			//день
 			var day = htmlEvent.QuerySelectorAll("span").Where(i => i.ClassName != null && i.ClassName == "gig_day");
-			temp.Day = day.ElementAt(0).TextContent.Replace(" ", "").Replace("\n", "").Replace("'", "''");
+			temp.Day = day.ElementAt(0).TextContent.Trim(' ', '\n').Replace("'", "\"");
 			//путь к картинке
 			var ImgSrc = htmlEvent.QuerySelectorAll("img").Where(i => i.ClassName != null && i.ClassName == "gig_img");
 			string imgUrl = ImgSrc.ElementAt(0).GetAttribute("src");

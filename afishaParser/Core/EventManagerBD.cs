@@ -154,7 +154,7 @@ namespace afishaParser
 		/// <summary>
 		/// Создает файл событий
 		/// </summary>
-		public void SaveData()
+		private void SaveData()
 		{
 			if(events == null)
 				return;
