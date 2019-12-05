@@ -156,7 +156,7 @@ namespace afishaParser {
 		}
 
 		private async void StartParse() {
-			parser = new Parser();
+			parser = new ParserForNewFrontend("https://concertinfo.ru/");
 			IsLoading = true;
 			Events = await parser.ParseAsync();
 			if(Events == null)

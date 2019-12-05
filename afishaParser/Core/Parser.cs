@@ -13,10 +13,10 @@ using System.Diagnostics;
 namespace afishaParser {
 	public class Parser {
 
-		private readonly string url;
+		protected readonly string url;
 
-		public Parser() {
-			url = "http://concertinfo.ru";
+		public Parser(string url) {
+			this.url = url;
 		}
 
 		public event Action<object, Event> EventLoaded;
@@ -31,7 +31,7 @@ namespace afishaParser {
 			// получить html строку
 			string html = "";
 			try {
-				html = GetHtml();
+				html = GetHtml(url);
 			}
 			catch {
 				return null;
@@ -69,7 +69,7 @@ namespace afishaParser {
 		/// </summary>
 		/// <param name="htmlEvent">Блок исходного кода в котором содержится инф. о событии</param>
 		/// <returns>Информация о событии</returns>
-		private Event GetInfo(IHtmlDocument htmlEvent) {
+		protected virtual Event GetInfo(IHtmlDocument htmlEvent) {
 			Event temp = new Event();
 			//заглавие
 			var title = htmlEvent.QuerySelectorAll("span").Where(i => i.ClassName != null && i.ClassName == "gig_title");
@@ -118,7 +118,7 @@ namespace afishaParser {
 		/// </summary>
 		/// <param name="src">Путь к изображению</param>
 		/// <returns>Путь к скачанному изображению</returns>
-		private string DownloadPic(string src) {
+		protected virtual string DownloadPic(string src) {
 			// создать папку pics если ее нет
 			if(!Directory.Exists(Directory.GetCurrentDirectory() + "pics"))
 				Directory.CreateDirectory("pics");
@@ -137,7 +137,7 @@ namespace afishaParser {
 		/// </summary>
 		/// <param name="doc">Исходный код страницы</param>
 		/// <returns>HTML блок с инф. о событии</returns>
-		private List<string> DivideHtml(IHtmlDocument doc) {
+		protected virtual List<string> DivideHtml(IHtmlDocument doc) {
 			List<string> htmlEvents = new List<string>();
 			var items = doc.QuerySelectorAll("div").Where(item => item.ClassName != null && item.ClassName == "gig_block");
 			foreach(var item in items) {
@@ -150,7 +150,7 @@ namespace afishaParser {
 		/// Получить исходный код страницы
 		/// </summary>
 		/// <returns>исходный код страницы</returns>
-		private string GetHtml() {
+		protected string GetHtml(string url) {
 			string html = "";
 			HttpClient client = new HttpClient();
 			HttpResponseMessage res;
